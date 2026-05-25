@@ -1,9 +1,3 @@
-import sys
-import streamlit as st
-
-st.write("Python version:", sys.version)
-st.stop()
-
 import streamlit as st
 # JUDUL =================================================
 st.set_page_config(page_title = "Analisis Tren Berdasarkan Nilai Close dan Volatilitas Harga Saham", layout="wide")
