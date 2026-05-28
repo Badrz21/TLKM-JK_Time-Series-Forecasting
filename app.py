@@ -67,7 +67,8 @@ with card3:
 with card4:
     st.metric(
               "Volatilitas 30 Hari Terakhir(%)",
-              round(df[("TLKM.JK", "Close")].pct_change().rolling(30).std().iloc[-1], 2)) * 100
+              round(df[("TLKM.JK", "Close")].pct_change().rolling(30).std().iloc[-1], 2) * 100
+            )
 
 with card5:
     st.metric(
