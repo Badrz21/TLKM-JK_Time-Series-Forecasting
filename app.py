@@ -74,6 +74,7 @@ with card5:
     st.metric(
               "Return Harian",
               df[("TLKM.JK", "Close")].pct_change().iloc[-1]
+            )
 st.divider()
 
 # ======================== GRAFIK =============================
