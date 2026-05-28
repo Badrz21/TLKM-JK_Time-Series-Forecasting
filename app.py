@@ -125,7 +125,7 @@ forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=1
 df_last_forecast = pd.DataFrame(prediction_result_14D, index=forecast_dates, columns=[(stock, "Close_Pred")])
 
 st.subheader("Grafik Prediksi 14 Hari Ke Depan")
-st.write(f"Nilai Close kemarin: {df[("TLKM.JK", "Low")].iloc[-2]}")
+
 plt.figure(figsize=(10,5))
 plot_pred = sns.lineplot(
                         data=df_last_forecast[(stock, "Close_Pred")],
@@ -138,3 +138,5 @@ plt.ylabel("Close Price")
 plt.xticks(rotation=45)
 plt.tight_layout()
 st.pyplot(plt.gcf())
+
+st.write(f"Nilai Close kemarin: {df[("TLKM.JK", "Low")].iloc[-2]}")
