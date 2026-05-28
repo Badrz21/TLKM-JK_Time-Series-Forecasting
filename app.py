@@ -167,5 +167,5 @@ with card7:
 
 st.warning("""
 Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!
-Silahkan lihat informasi tanggal kemarin dengan tanggal kemarin yang terdapat pada Yfinance di atas.            
+\nSilahkan lihat informasi tanggal kemarin dengan tanggal kemarin yang terdapat pada Yfinance di atas.            
            """)
