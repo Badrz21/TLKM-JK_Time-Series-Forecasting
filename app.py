@@ -40,7 +40,7 @@ df = yf.download(
 )
 
 st.write(f"Pembaruan Terakhir: {datetime.now().date()}")
-st.write(f"Data Kemarin (sebelum hari ini) yang tersedia di Yfinance : {st.write(df.index[-1])}")
+st.write(f"Data Kemarin (sebelum hari ini) yang tersedia di Yfinance : {(df.index[-1]).date()}")
 
 st.subheader("Informasi hari ini")
 # ======================= CONTAINER 1 ============================
