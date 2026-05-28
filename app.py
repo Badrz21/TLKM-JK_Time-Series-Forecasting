@@ -187,6 +187,7 @@ with left:
     plt.title("Volatilitas")
     plt.xlabel("Tanggal")
     plt.ylabel("Volatilitas")
+    plt.xticks(rotation=45)
     plt.tight_layout()
     st.pyplot(plt.gcf())
 with right:
