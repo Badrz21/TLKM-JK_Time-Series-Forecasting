@@ -119,13 +119,13 @@ for i in range(14):
 
 
 # Grafik Prediksi ==========================================
-st.write(f"Nilai Close kemarin: {df[("TLKM.JK", "Low")].iloc[-2]}")
 prediction_result_14D = scaler.inverse_transform(np.array(pred_result).reshape(-1, 1))
 last_date = df.index[-1]
 forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=14, freq="D")
 df_last_forecast = pd.DataFrame(prediction_result_14D, index=forecast_dates, columns=[(stock, "Close_Pred")])
 
 st.subheader("Grafik Prediksi 14 Hari Ke Depan")
+st.write(f"Nilai Close kemarin: {df[("TLKM.JK", "Low")].iloc[-2]}")
 plt.figure(figsize=(10,5))
 plot_pred = sns.lineplot(
                         data=df_last_forecast[(stock, "Close_Pred")],
