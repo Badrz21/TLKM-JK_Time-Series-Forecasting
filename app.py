@@ -86,14 +86,14 @@ sns.lineplot(
   data=df[(stock, 'Close')],
   label=stock,
   color="red",
-  marker="s"
+  marker="o"
   )
 
 sns.lineplot(
   data= df[(stock, 'Close')].rolling(15).mean(),
   label="Moving Average",
   color="green",
-  marker="s"
+  marker="o"
   )
 
 plt.xlim(pd.Timestamp('2024-04-01'))
@@ -171,3 +171,36 @@ st.warning("""
 Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!
 \nSilahkan lihat informasi tanggal kemarin dengan tanggal kemarin yang terdapat pada Yfinance di atas.            
            """)
+
+st.divider()
+st.subheader("Volatilitas dan Exploratory Data Analysis (EDA)")
+left, right = st.columns([3, 1])
+with left:
+    plt.figure(figsize=(6,5))
+    plot_pred = sns.lineplot(
+                        data=df[("TLKM.JK", "Close")].pct_change().rolling(30).std(),
+                        color="blue",
+                        marker="o",
+                        )
+    plt.title("Volatilitas")
+    plt.xlabel("Tanggal")
+    plt.ylabel("Volatilitas")
+    plt.tight_layout()
+    st.pyplot(plt.gcf())
+with right:
+    st.metric(
+              "Rata-Rata Close Tahunan",
+              round(df[("TLKM.JK", "Close")].mean() * 100, 2) 
+            )
+    st.metric(
+              "Rata-Rata Open Tahunan",
+              round(df[("TLKM.JK", "Open")].mean() * 100, 2) 
+            )
+    st.metric(
+              "Return Tertinggi",
+              max(round(df[("TLKM.JK", "Close")].pct_change() * 100,2)) 
+            )
+     st.metric(
+              "Return Terendah",
+              min(round(df[("TLKM.JK", "Close")].pct_change() * 100,2)) 
+            )   
