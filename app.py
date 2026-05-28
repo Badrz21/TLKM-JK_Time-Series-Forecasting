@@ -140,4 +140,4 @@ plt.tight_layout()
 st.pyplot(plt.gcf())
 st.divider()
 
-st.write(f"Nilai Close kemarin: {df[("TLKM.JK", "Low")].iloc[-2]}")
+st.write(f"Nilai Close kemarin: {df[('TLKM.JK', 'Low')].iloc[-2]}")
