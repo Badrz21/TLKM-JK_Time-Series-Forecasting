@@ -176,9 +176,11 @@ st.divider()
 st.subheader("Volatilitas dan Exploratory Data Analysis (EDA)")
 left, right = st.columns([3, 1])
 with left:
+    vol = df[("TLKM.JK", "Close")].pct_change().rolling(30).std()
     plt.figure(figsize=(6,5))
     plot_pred = sns.lineplot(
-                        data=df[("TLKM.JK", "Close")].pct_change().rolling(30).std(),
+                        x = vol.index,
+                        y = vol.values,
                         color="blue",
                         marker="o",
                         )
