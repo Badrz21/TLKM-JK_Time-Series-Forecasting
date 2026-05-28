@@ -72,8 +72,8 @@ with card4:
 
 with card5:
     st.metric(
-              "Close Kemarin",
-              df[("TLKM.JK", "Low")].iloc[-2])
+              "Return Harian",
+              df[("TLKM.JK", "Close")].pct_change().iloc[-1]
 st.divider()
 
 # ======================== GRAFIK =============================
