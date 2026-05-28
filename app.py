@@ -143,8 +143,8 @@ st.divider()
 
 st.subheader("Galat (Akurasi) Prediksi dengan Aktual Kemarin")
 st.info(
-    f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}\n"
-    f"Data terakhir yang tersedia di YFinance : {df.index[-1].date()}"
+    f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}"
+    f"\nData terakhir yang tersedia di YFinance : {df.index[-1].date()}"
 )
 
 card5, card6, card7 = st.columns(3)
