@@ -73,7 +73,7 @@ with card4:
 with card5:
     st.metric(
               "Return Harian",
-              f"{round(df[("TLKM.JK", "Close")].pct_change().iloc[-1] * 100,2)}%"
+              f"{round(df[('TLKM.JK', 'Close')].pct_change().iloc[-1] * 100,2)}%"
             )
 st.divider()
 
