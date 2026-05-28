@@ -172,8 +172,8 @@ Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasion
 
 st.divider()
 st.subheader("Volatilitas dan Exploratory Data Analysis (EDA)")
-st.info(f"Tanggal Mulai : {(df.index[0]).date()}")
-st.info(f"Tanggal Berakhir : {(df.index[-1]).date()}")
+st.success(f"Tanggal Mulai : {(df.index[0]).date()}")
+st.error(f"Tanggal Berakhir : {(df.index[-1]).date()}")
 left, right = st.columns([3, 1])
 with left:
     vol = df[("TLKM.JK", "Close")].pct_change().rolling(30).std()
