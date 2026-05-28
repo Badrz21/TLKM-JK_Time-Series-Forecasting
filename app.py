@@ -91,7 +91,7 @@ sns.lineplot(
 sns.lineplot(
   data= df[(stock, 'Close')].rolling(20).mean(),
   label="MA_20",
-  color="yellow",
+  color="green",
   )
 
 sns.lineplot(
