@@ -119,6 +119,7 @@ for i in range(14):
 
 
 # Grafik Prediksi ==========================================
+st.write(f"Nilai Close kemarin: {df[("TLKM.JK", "Low")].iloc[-2]}")
 prediction_result_14D = scaler.inverse_transform(np.array(pred_result).reshape(-1, 1))
 last_date = df.index[-1]
 forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=14, freq="D")
