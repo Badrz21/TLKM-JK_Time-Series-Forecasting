@@ -195,11 +195,11 @@ with right:
     ret = df[("TLKM.JK", "Close")].pct_change() * 100
     st.metric(
               "Rata-Rata Close Tahunan",
-              round(df[("TLKM.JK", "Close")].mean(), 2) 
+              round(df[('TLKM.JK', 'Close')].mean(), 2) 
             )
     st.metric(
               "Rata-Rata Open Tahunan",
-              round(df[("TLKM.JK", "Open")].mean(), 2) 
+              round(df[('TLKM.JK', 'Open')].mean(), 2) 
             )
     st.metric(
               "Return Tertinggi",
