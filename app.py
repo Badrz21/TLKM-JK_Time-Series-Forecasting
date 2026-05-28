@@ -39,7 +39,7 @@ df = yf.download(
                   progress = False
 )
 
-st.write(f"Tanggal hari ini: {datetime.now().date()}")
+st.write(f"Pembaruan Terakhir: {datetime.now().date()}")
 
 # ======================= CONTAINER 1 ============================
 card1, card2, card3, card4 = st.columns(4)
