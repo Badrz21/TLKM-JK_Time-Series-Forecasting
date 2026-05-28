@@ -71,7 +71,7 @@ with card4:
 with card5:
     st.metric(
               "Close Kemarin",
-              round(df[("TLKM.JK", "Close")].rolling(30).std().iloc[-2], 2))
+              df[("TLKM.JK", "Low")].iloc[-2])
 st.divider()
 
 # ======================== GRAFIK =============================
