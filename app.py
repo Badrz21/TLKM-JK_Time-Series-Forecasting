@@ -192,7 +192,7 @@ with left:
     plt.tight_layout()
     st.pyplot(plt.gcf())
 with right:
-    ret = df[("TLKM.JK", "Close")].pct_change() * 100
+    ret = df[('TLKM.JK', 'Close')].pct_change() * 100
     st.metric(
               "Rata-Rata Close Tahunan",
               round(df[('TLKM.JK', 'Close')].mean(), 2) 
