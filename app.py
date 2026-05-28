@@ -160,5 +160,5 @@ with card6:
 with card7:
     st.metric(
               "Galat (%)",
-              round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-2])/df[('TLKM.JK', 'Low')].iloc[-2]),2)
+              round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-2]) * 100 /df[('TLKM.JK', 'Low')].iloc[-2]),2)
               )
