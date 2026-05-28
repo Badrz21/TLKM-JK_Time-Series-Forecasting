@@ -205,5 +205,5 @@ with right:
             )
     st.metric(
               "Return Terendah (%)",
-              round(ret.max(), 2) 
+              round(ret.min(), 2) 
             )   
