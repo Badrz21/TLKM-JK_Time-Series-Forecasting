@@ -43,7 +43,7 @@ st.write(f"Pembaruan Terakhir: {datetime.now().date()}")
 
 st.subheader("Informasi hari ini")
 # ======================= CONTAINER 1 ============================
-card1, card2, card3, card4, card5 = st.columns(4)
+card1, card2, card3, card4, card5 = st.columns(5)
 
 with card1:
     st.metric(
