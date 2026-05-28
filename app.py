@@ -140,8 +140,30 @@ plt.tight_layout()
 st.pyplot(plt.gcf())
 st.divider()
 
-st.subheader("Galat (Akurasi) Prediksi dengan")
+st.subheader("Galat (Akurasi) Prediksi dengan Aktual Kemarin")
 st.write(f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}")
-st.write(f"Nilai Close kemarin: {df[('TLKM.JK', 'Low')].iloc[-2]}")
-st.write(f"Nilai Prediksi Close kemarin: {df_last_forecast[(stock, 'Close_Pred')].iloc[1]}")
 
+card5, card6, card7 = st.columns(3)
+with card5:
+    st.metric(
+              "Nilai Close Kemarin",
+              df[('TLKM.JK', 'Low')].iloc[-2]
+              )
+
+with card5:
+    st.metric(
+              "Nilai Aktual Close Kemarin",
+              df[('TLKM.JK', 'Low')].iloc[-2]
+              )
+
+with card6:
+    st.metric(
+              "Nilai rediksi Close Kemarin",
+              round(df_last_forecast[(stock, 'Close_Pred')].iloc[0],2)
+              )
+
+with card7:
+    st.metric(
+              "Galat (%)",
+              round((df[('TLKM.JK', 'Low')].iloc[-2] - df_last_forecast[(stock, 'Close_Pred')].iloc[0]),2)
+              )
