@@ -190,7 +190,7 @@ with left:
     plt.tight_layout()
     st.pyplot(plt.gcf())
 with right:
-    ret = round(df[("TLKM.JK", "Close")].pct_change() * 100,2)
+    ret = df[("TLKM.JK", "Close")].pct_change() * 100
     st.metric(
               "Rata-Rata Close Tahunan",
               round(df[("TLKM.JK", "Close")].mean(), 2) 
@@ -201,9 +201,9 @@ with right:
             )
     st.metric(
               "Return Tertinggi (%)",
-              max(ret) 
+              round(ret.max(), 2) 
             )
     st.metric(
               "Return Terendah (%)",
-              min(ret) 
+              round(ret.max(), 2) 
             )   
