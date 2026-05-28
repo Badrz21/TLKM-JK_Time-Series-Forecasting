@@ -79,7 +79,7 @@ st.divider()
 
 # ======================== GRAFIK =============================
 
-st.subheader("Grafik Moving Average 15 Hari")
+st.subheader("Grafik Moving Average")
 plt.figure(figsize=(12,5))
   
 sns.lineplot(
@@ -89,9 +89,21 @@ sns.lineplot(
   )
 
 sns.lineplot(
-  data= df[(stock, 'Close')].rolling(15).mean(),
-  label="Moving Average",
-  color="green",
+  data= df[(stock, 'Close')].rolling(20).mean(),
+  label="MA_20",
+  color="yellow",
+  )
+
+sns.lineplot(
+  data= df[(stock, 'Close')].rolling(50).mean(),
+  label="MA_50",
+  color="black",
+  )
+
+sns.lineplot(
+  data= df[(stock, 'Close')].rolling(200).mean(),
+  label="MA_200",
+  color="purple",
   )
 
 plt.xlim(pd.Timestamp('2024-04-01'))
