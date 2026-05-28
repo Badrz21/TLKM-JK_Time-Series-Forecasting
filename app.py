@@ -72,8 +72,8 @@ with card4:
 
 with card5:
     st.metric(
-              "Return Harian (%)",
-              round(df[("TLKM.JK", "Close")].pct_change().iloc[-1] * 100,2)
+              "Return Harian",
+              f"{round(df[("TLKM.JK", "Close")].pct_change().iloc[-1] * 100,2)}%"
             )
 st.divider()
 
@@ -202,10 +202,10 @@ with right:
               round(df[("TLKM.JK", "Open")].mean(), 2) 
             )
     st.metric(
-              "Return Tertinggi (%)",
-              round(ret.max(), 2) 
+              "Return Tertinggi",
+              f"{round(ret.max(), 2)}%" 
             )
     st.metric(
-              "Return Terendah (%)",
-              round(ret.min(), 2) 
+              "Return Terendah",
+              f"{round(ret.min(), 2)}%" 
             )   
