@@ -41,6 +41,7 @@ df = yf.download(
 
 st.write(f"Pembaruan Terakhir: {datetime.now().date()}")
 
+st.subheader("Informasi hari ini")
 # ======================= CONTAINER 1 ============================
 card1, card2, card3, card4 = st.columns(4)
 
