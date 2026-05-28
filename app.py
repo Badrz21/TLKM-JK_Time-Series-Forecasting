@@ -149,7 +149,7 @@ card5, card6, card7 = st.columns(3)
 
 with card5:
     st.metric(
-              "Nilai Aktual Close Kemarin",
+              "Nilai Aktual YFinance Close Kemarin",
               df[('TLKM.JK', 'Low')].iloc[-1]
               )
 
