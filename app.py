@@ -142,8 +142,10 @@ st.pyplot(plt.gcf())
 st.divider()
 
 st.subheader("Galat (Akurasi) Prediksi dengan Aktual Kemarin")
-st.write(f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}")
-st.write(f"Data Kemarin (sebelum hari ini) yang tersedia di Yfinance : {(df.index[-1]).date()}")
+st.info(
+    f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}\n"
+    f"Data terakhir yang tersedia di YFinance : {df.index[-1].date()}"
+)
 
 card5, card6, card7 = st.columns(3)
 
