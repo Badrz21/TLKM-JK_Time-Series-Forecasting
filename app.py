@@ -143,6 +143,7 @@ st.divider()
 
 st.subheader("Galat (Akurasi) Prediksi dengan Aktual Kemarin")
 st.write(f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}")
+st.write(f"Data Kemarin (sebelum hari ini) yang tersedia di Yfinance : {(df.index[-1]).date()}")
 
 card5, card6, card7 = st.columns(3)
 
@@ -164,4 +165,7 @@ with card7:
               round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-1]) * 100 /df[('TLKM.JK', 'Low')].iloc[-2]),2)
               )
 
-st.warning("Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!")
+st.warning("""
+Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!
+Silahkan lihat informasi tanggal kemarin dengan tanggal kemarin yang terdapat pada Yfinance di atas.            
+           """)
