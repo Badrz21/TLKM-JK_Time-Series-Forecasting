@@ -163,4 +163,4 @@ with card7:
               round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-2]) * 100 /df[('TLKM.JK', 'Low')].iloc[-2]),2)
               )
 
-st.error("Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!")
+st.warning("Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!")
