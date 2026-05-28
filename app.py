@@ -106,8 +106,10 @@ sns.lineplot(
   color="purple",
   )
 
-plt.xlim(pd.Timestamp('2024-04-01'))
 
+
+plt.xlim(pd.Timestamp('2024-04-01'))
+plt.grid(True)
 plt.title("Close Price History")
 plt.xlabel("Tanggal")
 plt.ylabel("Close Price")
