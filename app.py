@@ -202,7 +202,7 @@ with right:
               "Return Tertinggi",
               max(round(df[("TLKM.JK", "Close")].pct_change() * 100,2)) 
             )
-     st.metric(
+    st.metric(
               "Return Terendah",
               min(round(df[("TLKM.JK", "Close")].pct_change() * 100,2)) 
             )   
