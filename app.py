@@ -141,4 +141,4 @@ st.pyplot(plt.gcf())
 st.divider()
 
 st.write(f"Nilai Close kemarin: {df[('TLKM.JK', 'Low')].iloc[-2]}")
-st.write(f"Nilai Prediksi Close kemarin: {df_last_forecast[(stock, "Close_Pred")].iloc[1]}")
+st.write(f"Nilai Prediksi Close kemarin: {df_last_forecast[(stock, 'Close_Pred')].iloc[1]}")
