@@ -39,7 +39,7 @@ df = yf.download(
                   progress = False
 )
 
-st.success(f"Pembaruan Terakhir: {datetime.now().strftime('%d-%m-%Y %H:%M')}")
+st.success(f"Pembaruan Terakhir / Waktu Server (UTC+0): {datetime.now().strftime('%d-%m-%Y %H:%M')}")
 st.info(f"Data Kemarin (sebelum hari ini) yang tersedia di Yfinance : {(df.index[-1]).date()}")
 
 st.subheader("Informasi hari ini")
@@ -161,7 +161,7 @@ with card6:
 with card7:
     st.metric(
               "Galat (%)",
-              round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-2]) * 100 /df[('TLKM.JK', 'Low')].iloc[-2]),2)
+              round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-1]) * 100 /df[('TLKM.JK', 'Low')].iloc[-2]),2)
               )
 
 st.warning("Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!")
