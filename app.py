@@ -43,7 +43,7 @@ st.write(f"Pembaruan Terakhir: {datetime.now().date()}")
 
 st.subheader("Informasi hari ini")
 # ======================= CONTAINER 1 ============================
-card1, card2, card3, card4 = st.columns(4)
+card1, card2, card3, card4, card5 = st.columns(4)
 
 with card1:
     st.metric(
@@ -66,8 +66,12 @@ with card3:
 with card4:
     st.metric(
               "Volatilitas 30 Hari",
-              round(df[("TLKM.JK", "Close")].rolling(30).std().iloc[-1], 2))
+              round(df[("TLKM.JK", "Close")].rolling(30).std().iloc[-30], 2))
 
+with card5:
+    st.metric(
+              "Close Kemarin",
+              round(df[("TLKM.JK", "Close")].rolling(30).std().iloc[-2], 2))
 st.divider()
 
 # ======================== GRAFIK =============================
