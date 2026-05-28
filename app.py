@@ -140,5 +140,8 @@ plt.tight_layout()
 st.pyplot(plt.gcf())
 st.divider()
 
+st.subheader("Galat (Akurasi) Prediksi dengan")
+st.write(f"Tanggal Kemarin : {datetime.now() - timedelta(days=1)}")
 st.write(f"Nilai Close kemarin: {df[('TLKM.JK', 'Low')].iloc[-2]}")
 st.write(f"Nilai Prediksi Close kemarin: {df_last_forecast[(stock, 'Close_Pred')].iloc[1]}")
+
