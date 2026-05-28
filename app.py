@@ -86,14 +86,12 @@ sns.lineplot(
   data=df[(stock, 'Close')],
   label=stock,
   color="red",
-  marker="o"
   )
 
 sns.lineplot(
   data= df[(stock, 'Close')].rolling(15).mean(),
   label="Moving Average",
   color="green",
-  marker="o"
   )
 
 plt.xlim(pd.Timestamp('2024-04-01'))
@@ -182,7 +180,6 @@ with left:
                         x = vol.index,
                         y = vol.values,
                         color="blue",
-                        marker="o",
                         )
     plt.title("Volatilitas")
     plt.xlabel("Tanggal")
