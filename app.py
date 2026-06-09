@@ -79,7 +79,7 @@ st.divider()
 
 # ======================== GRAFIK =============================
 
-tab1, tab2, tab3, tab4 = st.tabs(["Moving Average"],["Prediksi 14 Hari"],["Akurasi Prediksi"],["Volatilitas dan EDA"])
+tab1, tab2, tab3, tab4 = st.tabs(["Moving Average","Prediksi 14 Hari","Akurasi Prediksi","Volatilitas dan EDA")
 
 with tab1:
     st.subheader("Grafik Moving Average")
