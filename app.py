@@ -79,147 +79,151 @@ st.divider()
 
 # ======================== GRAFIK =============================
 
-st.subheader("Grafik Moving Average")
-plt.figure(figsize=(12,5))
+tab1, tab2, tab3, tab4 = st.tabs(["Moving Average"],["Prediksi 14 Hari"],["Akurasi Prediksi"],["Volatilitas dan EDA"])
+
+with tab1:
+    st.subheader("Grafik Moving Average")
+    plt.figure(figsize=(12,5))
   
-sns.lineplot(
-  data=df[(stock, 'Close')],
-  label=stock,
-  color="red",
-  )
+    sns.lineplot(
+      data=df[(stock, 'Close')],
+      label=stock,
+      color="red",
+      )
 
-sns.lineplot(
-  data= df[(stock, 'Close')].rolling(20).mean(),
-  label="MA_20",
-  color="green",
-  )
+    sns.lineplot(
+      data= df[(stock, 'Close')].rolling(20).mean(),
+      label="MA_20",
+      color="green",
+      )
 
-sns.lineplot(
-  data= df[(stock, 'Close')].rolling(50).mean(),
-  label="MA_50",
-  color="black",
-  )
+    sns.lineplot(
+      data= df[(stock, 'Close')].rolling(50).mean(),
+      label="MA_50",
+      color="black",
+      )
 
-sns.lineplot(
-  data= df[(stock, 'Close')].rolling(200).mean(),
-  label="MA_200",
-  color="purple",
-  )
+    sns.lineplot(
+      data= df[(stock, 'Close')].rolling(200).mean(),
+      label="MA_200",
+      color="purple",
+      )
 
+    plt.xlim(pd.Timestamp('2024-04-01'))
+    plt.grid(True)
+    plt.title("Close Price History")
+    plt.xlabel("Tanggal")
+    plt.ylabel("Close Price")
+    st.pyplot(plt.gcf())
 
+    plt.figure(figsize=(12,5))
 
-plt.xlim(pd.Timestamp('2024-04-01'))
-plt.grid(True)
-plt.title("Close Price History")
-plt.xlabel("Tanggal")
-plt.ylabel("Close Price")
-st.pyplot(plt.gcf())
+with tab2:    
+    close_price = df[[(stock, "Close")]].values
+    scaled_data = scaler.transform(close_price)
+    pred_14 = scaled_data[-14:].reshape((1, 14, 1))
 
-plt.figure(figsize=(12,5))  
-close_price = df[[(stock, "Close")]].values
-scaled_data = scaler.transform(close_price)
-pred_14 = scaled_data[-14:].reshape((1, 14, 1))
+    pred_result = []
 
-pred_result = []
+    for i in range(14):
+      pred = model.predict(pred_14, verbose=0)[0][0]
+      pred_result.append(pred)
 
-for i in range(14):
-  pred = model.predict(pred_14, verbose=0)[0][0]
-  pred_result.append(pred)
-
-  pred_14 = np.append(
-                      pred_14[:, 1:, :],
-                      np.array([[[pred]]]),
-                      axis=1
-                      )
+      pred_14 = np.append(
+                          pred_14[:, 1:, :],
+                          np.array([[[pred]]]),
+                          axis=1
+                          )
 
 
 # Grafik Prediksi ==========================================
-prediction_result_14D = scaler.inverse_transform(np.array(pred_result).reshape(-1, 1))
-last_date = df.index[-1]
-forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=14, freq="D")
-df_last_forecast = pd.DataFrame(prediction_result_14D, index=forecast_dates, columns=[(stock, "Close_Pred")])
+    prediction_result_14D = scaler.inverse_transform(np.array(pred_result).reshape(-1, 1))
+    last_date = df.index[-1]
+    forecast_dates = pd.date_range(start=last_date + pd.Timedelta(days=1), periods=14, freq="D")
+    df_last_forecast = pd.DataFrame(prediction_result_14D, index=forecast_dates, columns=[(stock, "Close_Pred")])
 
-st.subheader("Grafik Prediksi 14 Hari Ke Depan")
+    st.subheader("Grafik Prediksi 14 Hari Ke Depan")
 
-plt.figure(figsize=(10,5))
-plot_pred = sns.lineplot(
-                        data=df_last_forecast[(stock, "Close_Pred")],
-                        color="blue",
-                        marker="s",
-                        )
-plt.title("Prediksi")
-plt.xlabel("Tanggal")
-plt.ylabel("Close Price")
-plt.xticks(rotation=45)
-plt.tight_layout()
-st.pyplot(plt.gcf())
-st.divider()
-
-st.subheader("Galat (Akurasi) Prediksi dengan Aktual Kemarin")
-st.info(
-    f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}  \n"
-    f"Data terakhir yang tersedia di YFinance : {df.index[-1].date()}"
-)
-
-card5, card6, card7 = st.columns(3)
-
-with card5:
-    st.metric(
-              "Nilai Aktual YFinance Close Kemarin",
-              df[('TLKM.JK', 'Low')].iloc[-1]
-              )
-
-with card6:
-    st.metric(
-              "Nilai Prediksi Close Kemarin",
-              round(df_last_forecast[(stock, 'Close_Pred')].iloc[0],2)
-              )
-
-with card7:
-    st.metric(
-              "Galat (%)",
-              round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-1]) * 100 /df[('TLKM.JK', 'Low')].iloc[-2]),2)
-              )
-
-st.warning("""
-Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!
-\nSilahkan lihat informasi tanggal kemarin dengan tanggal kemarin yang terdapat pada Yfinance di atas.            
-           """)
-
-st.divider()
-st.subheader("Volatilitas dan Exploratory Data Analysis (EDA)")
-st.success(f"Tanggal Mulai : {(df.index[0]).date()}")
-st.error(f"Tanggal Berakhir : {(df.index[-1]).date()}")
-left, right = st.columns([3, 1])
-with left:
-    vol = df[("TLKM.JK", "Close")].pct_change().rolling(30).std()
-    plt.figure(figsize=(6,5))
+    plt.figure(figsize=(10,5))
     plot_pred = sns.lineplot(
-                        x = vol.index,
-                        y = vol.values,
-                        color="blue",
-                        )
-    plt.title("Volatilitas")
+                            data=df_last_forecast[(stock, "Close_Pred")],
+                            color="blue",
+                            marker="s",
+                            )
+    plt.title("Prediksi")
     plt.xlabel("Tanggal")
-    plt.ylabel("Volatilitas")
+    plt.ylabel("Close Price")
     plt.xticks(rotation=45)
     plt.tight_layout()
     st.pyplot(plt.gcf())
-with right:
-    ret = df[('TLKM.JK', 'Close')].pct_change() * 100
-    st.metric(
-              "Rata-Rata Close",
-              round(df[('TLKM.JK', 'Close')].mean(), 2) 
-            )
-    st.metric(
-              "Rata-Rata Open",
-              round(df[('TLKM.JK', 'Open')].mean(), 2) 
-            )
-    st.metric(
-              "Return Tertinggi",
-              f"{round(ret.max(), 2)}%" 
-            )
-    st.metric(
-              "Return Terendah",
-              f"{round(ret.min(), 2)}%" 
+    st.divider()
+
+with tab3:
+    st.subheader("Galat (Akurasi) Prediksi dengan Aktual Kemarin")
+    st.info(
+        f"Tanggal Kemarin : {(datetime.now() - pd.Timedelta(days=1)).date()}  \n"
+        f"Data terakhir yang tersedia di YFinance : {df.index[-1].date()}"
+    )
+
+    card5, card6, card7 = st.columns(3)
+
+    with card5:
+        st.metric(
+                  "Nilai Aktual YFinance Close Kemarin",
+                  df[('TLKM.JK', 'Low')].iloc[-1]
+                  )
+
+    with card6:
+        st.metric(
+                  "Nilai Prediksi Close Kemarin",
+                  round(df_last_forecast[(stock, 'Close_Pred')].iloc[0],2)
+                  )
+
+    with card7:
+        st.metric(
+                  "Galat (%)",
+                  round(((df_last_forecast[(stock, 'Close_Pred')].iloc[0] - df[('TLKM.JK', 'Low')].iloc[-1]) * 100 /df[('TLKM.JK', 'Low')].iloc[-2]),2)
+                  )
+
+    st.warning("""
+    Data YFinance TIDAK DAPAT menampilkan data saat akhir perkan / hari libur nasional, sehingga data di atas dapat tidak akurat jika kemarin atau kemarin lusa adalah hari libur!
+    \nSilahkan lihat informasi tanggal kemarin dengan tanggal kemarin yang terdapat pada Yfinance di atas.            
+               """)
+
+with tab4:
+    st.subheader("Volatilitas dan Exploratory Data Analysis (EDA)")
+    st.success(f"Tanggal Mulai : {(df.index[0]).date()}")
+    st.error(f"Tanggal Berakhir : {(df.index[-1]).date()}")
+    left, right = st.columns([3, 1])
+    with left:
+        vol = df[("TLKM.JK", "Close")].pct_change().rolling(30).std()
+        plt.figure(figsize=(6,5))
+        plot_pred = sns.lineplot(
+                            x = vol.index,
+                            y = vol.values,
+                            color="blue",
+                            )
+        plt.title("Volatilitas")
+        plt.xlabel("Tanggal")
+        plt.ylabel("Volatilitas")
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        st.pyplot(plt.gcf())
+    with right:
+        ret = df[('TLKM.JK', 'Close')].pct_change() * 100
+        st.metric(
+                  "Rata-Rata Close",
+                  round(df[('TLKM.JK', 'Close')].mean(), 2) 
+                )
+        st.metric(
+                  "Rata-Rata Open",
+                  round(df[('TLKM.JK', 'Open')].mean(), 2) 
+                )
+        st.metric(
+                  "Return Tertinggi",
+                  f"{round(ret.max(), 2)}%" 
+                )
+        st.metric(
+                  "Return Terendah",
+                  f"{round(ret.min(), 2)}%" 
             )   
